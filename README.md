@@ -1,9 +1,9 @@
 01-Knapsack Solvers
 ===================
 
-This project includes both a genetic algorithm and a simulated annealing approach to solving the 01-Knapsack problem. In this problem, the goal is to take a set of P packages, each with a size S and value V, and select the correct subset of them that maximizes the total value of all selected packages, without allowing the total size of all those selected to surpass the knapsack capacity C.
+This project includes both a genetic algorithm and a simulated annealing approach to solving the 01-Knapsack problem. In this problem, the goal is to take a set of P packages, each with a size S and value V, and select the correct subset of them that maximizes the total value of all selected packages, without allowing the total size of all those selected to surpass the knapsack capacity C. Both programs take command-line user inputs, and are intended to be run on the included datasets, which should be moved to the root directory. When specifying the dataset for the program to solve, the prefix before the underscore should be used. 
 
-Both take command-line user inputs, and are intended to be run on the included datasets, if moved to the root directory. The datasets prefixed "p_" were previously hosted at http://people.sc.fsu.edu/~jburkardt/datasets/knapsack_01/knapsack_01.html and have since been retired. A separate program (KnapsackGenerator) is included with this project which allows both toy problems and random problems to be generated in the same format. Some example output of this program is included in the data directory and prefixed "m_".
+The datasets prefixed "pXX_" were previously hosted at http://people.sc.fsu.edu/~jburkardt/datasets/knapsack_01/knapsack_01.html and have since been retired. For these, The 'c' suffix indicates capacity, with 'w' for weight, 'p' for package value, and 's' for optimal solution. A separate program (KnapsackGenerator) is included with this project which allows both toy problems and random problems to be generated in the same format but at a larger scale (though without the optimal solution, which is generally unknown). Some example output of this program is included in the data directory and prefixed "mXX_".
 
 The fitness function for the genetic algorithm is a simple expression of the form f = V-(X*(P*(S-C)+O)), where:
  - V is the total value of all items selected in the chromosome.
@@ -27,7 +27,7 @@ It also provides the following operators to choose from:
  - N-Point Mutation - Invert N random points in the chromosome.
  - Bit-Inversion Mutation - Invert all bits in the chromosome.
 
-The simulated annealing allows the testing parameters to be set at the start of each run. It includes a toggle which allows it to behave as a foolish hill-climber, and also provides the following settings:
+The simulated annealing allows the testing parameters to be set at the start of each run. It includes a toggle which allows it to behave as a foolish hill-climber (i.e., no probability of taking poorer solutions), and also provides the following settings:
  - The user can choose between an N-Point Perturbation, which inverts N random, unique points in the current solution, and N-Slice Perturbation, which picks N unique, random slice points (as above) and inverts half of the resulting segments.
  - The user can set the cooling factor alpha, the time factor beta, the initial temperature T0, and the initial number of iterations I0.
  - The user can set the fraction of the initial temperature at which to terminate the annealing process.
