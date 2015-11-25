@@ -88,23 +88,25 @@ public class SimulatedAnnealing
 		String prefix;
 		System.out.print("Enter dataset prefix: ");
 		
+		File source = new File(System.getProperty("java.class.path"));
+		String binDirectory = source.getAbsoluteFile().getParentFile().toString()+File.separator;
 		do // Check for the presence of the dataset.
 		{
 			notFound = 0;
 			prefix = inputReader.next();
-			File fileChecker = new File(prefix+"_c.txt");
+			File fileChecker = new File(binDirectory+prefix+"_c.txt");
 			if(fileChecker.exists())
 				notFound++;
-			fileChecker = new File(prefix+"_p.txt");
+			fileChecker = new File(binDirectory+prefix+"_p.txt");
 			if(fileChecker.exists())
 				notFound++;
-			fileChecker = new File(prefix+"_w.txt");
+			fileChecker = new File(binDirectory+prefix+"_w.txt");
 			if(fileChecker.exists())
 				notFound++;
 			if(notFound < 3) System.out.print("Full dataset could not be found.\nTry again: ");
 		} while (notFound < 3);
 		
-		File fileChecker = new File(prefix+"_s.txt");
+		File fileChecker = new File(binDirectory+prefix+"_s.txt");
 		if(fileChecker.exists())
 			optimalKnown = true;
 		
@@ -116,12 +118,12 @@ public class SimulatedAnnealing
 		{
 			System.out.println("\nGetting dataset " + prefix + "...");
 			System.out.println("Getting "+prefix+"_c.txt");
-			Scanner cScanner = new Scanner(new File(prefix+"_c.txt"));
+			Scanner cScanner = new Scanner(new File(binDirectory+prefix+"_c.txt"));
 			capacity = cScanner.nextInt();
 			cScanner.close();
 			
 			System.out.println("Getting "+prefix+"_w.txt");
-			Scanner wScanner = new Scanner(new File(prefix+"_w.txt"));
+			Scanner wScanner = new Scanner(new File(binDirectory+prefix+"_w.txt"));
 			while(wScanner.hasNextInt())
 			{
 				numItems++;
@@ -130,7 +132,7 @@ public class SimulatedAnnealing
 			wScanner.close();
 			
 			System.out.println("Getting "+prefix+"_p.txt");
-			Scanner pScanner = new Scanner(new File(prefix+"_p.txt"));
+			Scanner pScanner = new Scanner(new File(binDirectory+prefix+"_p.txt"));
 			while(pScanner.hasNextInt())
 			{
 				values.add(pScanner.nextInt());
@@ -141,7 +143,7 @@ public class SimulatedAnnealing
 			if(optimalKnown)
 			{
 				System.out.println("Getting "+prefix+"_s.txt");
-				Scanner sScanner = new Scanner(new File(prefix+"_s.txt"));
+				Scanner sScanner = new Scanner(new File(binDirectory+prefix+"_s.txt"));
 				
 				optimal = new boolean[numItems];
 				for(int i = 0; i < numItems && sScanner.hasNextInt(); i++)
@@ -289,7 +291,7 @@ public class SimulatedAnnealing
 		}
 		
 		System.out.println("\nFinal Solution: " + solStr);
-		System.out.print("Fitness: " + bestFitness);
+		System.out.println("Fitness: " + bestFitness);
 		if(optimalKnown)
 		{
 			double percent = (bestFitness/optimalFitness)*100;
