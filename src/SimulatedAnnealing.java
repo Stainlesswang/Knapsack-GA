@@ -219,8 +219,8 @@ public class SimulatedAnnealing
 					sol = newSol;
 					solFitness = newFitness;
 				}
-				
-				if(solFitness > bestFitness && getChromSize(sol) < capacity)
+				//should add "="   my friend
+				if(solFitness > bestFitness && getChromSize(sol) <= capacity)
 				{
 					for(int j = 0; j < numItems; j++)
 						bestSol[j] = sol[j];
